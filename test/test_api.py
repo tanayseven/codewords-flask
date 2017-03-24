@@ -1,4 +1,4 @@
-from flask_app.server import this_should_always_be_true
+from flask_app.app import this_should_always_be_true
 
 
 class TestExample:
