@@ -1,1 +1,2 @@
 pytest==3.0.7
+injector==0.12.0
