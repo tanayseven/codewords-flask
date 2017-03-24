@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+  <title>Codewords Flask</title>
+</head>
+<body>
+<h1>This is the list of the signed up users</h1>
+<p>
+  <ul>
+  {% for user in user_list %}
+    <li>user.username</li>
+  {% endfor %}
+  </ul>
+</p>
+</body>
