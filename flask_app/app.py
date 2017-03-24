@@ -1,3 +1,10 @@
+from flask import Flask
+app = Flask(__name__)
 
-def this_should_always_be_true():
-    return True
+
+@app.route("/hello")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
