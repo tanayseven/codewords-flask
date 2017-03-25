@@ -1,11 +1,14 @@
+from injector import Injector
+
 from flask_app.repos import AccountRepository
 
 
+from flask_app.modules import ProdDatabaseModule
+
 class Account(object):
 
-    __repo = AccountRepository()
-
-    def __init__(self, user_name='', full_name='', balance=0):
+    def __init__(self, user_name='', full_name='', balance=0, injector=Injector([ProdDatabasegiModule])):
+        self.__repo = injector.get(AccountRepository)
         self.__user_name = user_name
         self.__full_name = full_name
         self.__balance = balance
@@ -22,6 +25,5 @@ class Account(object):
     def balance(self):
         return self.__balance
 
-    @staticmethod
-    def login(user_name, password):
-        return Account.__repo.account_exists(user_name, password)
+    def login(self, user_name, password):
+        return self.__repo.account_exists(user_name, password)
