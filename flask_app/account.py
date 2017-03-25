@@ -27,3 +27,7 @@ class Account(object):
 
     def login(self, user_name, password):
         return self.__repo.account_exists(user_name, password)
+
+    @property
+    def all_accounts(self):
+        return self.__repo.get_list_of_accounts()

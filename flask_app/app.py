@@ -44,7 +44,8 @@ def sign_up():
 
 @app.route('/users_list', methods=['GET'])
 def users_list():
-    return render_template('users_list.jinja', user_list=[Account(user_name='tanay'), Account(user_name='tushar')])
+    account = Account()
+    return render_template('users_list.jinja', user_list=account.all_accounts)
 
 
 if __name__ == "__main__":
