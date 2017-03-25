@@ -1,8 +1,15 @@
 from flask import Flask, render_template, request
+from flask_injector import FlaskInjector
 
 import sys
+
+from injector import inject, Injector, Module
+
 sys.path.append('./')
 from flask_app.account import Account
+from flask_app.interfaces import AccountRepo
+from flask_app.repos import AccountRepository
+
 app = Flask(__name__)
 
 
@@ -35,9 +42,23 @@ def sign_up():
 
 
 @app.route('/users_list', methods=['GET'])
-def users_list():
-    return render_template('users_list.jinja', user_list=[Account(user_name='tanay'), Account(user_name='tushar')])
+@inject(account_repo=AccountRepo)
+def users_list(account_repo):
+    accounts = account_repo.get_all_account()
+    return render_template('users_list.jinja', user_list=accounts)
 
+
+class DevModule(Module):
+    def configure(self, binder):
+        binder.bind(
+            AccountRepo,
+            to=AccountRepository,
+            scope=request,
+        )
+
+
+injector = Injector(DevModule)
+FlaskInjector(app=app, injector=injector)
 
 if __name__ == "__main__":
     app.run()
