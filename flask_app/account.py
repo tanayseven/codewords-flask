@@ -7,8 +7,8 @@ from flask_app.modules import ProdDatabaseModule
 
 class Account(object):
 
-    def __init__(self, user_name='', full_name='', balance=0, injector=Injector([ProdDatabaseModule])):
-        self.__repo = injector.get(AccountRepository)
+    def __init__(self, user_name='', full_name='', balance=0, module=ProdDatabaseModule):
+        self.__repo = Injector([module]).get(AccountRepository)
         self.__user_name = user_name
         self.__full_name = full_name
         self.__balance = balance
