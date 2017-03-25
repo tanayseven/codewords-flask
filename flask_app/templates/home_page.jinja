@@ -5,11 +5,15 @@
 <body>
   <h1>Welcome to accounts system</h1>
 <p>
-  Please choose either of the follows
-  <ul>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/sign_up">Sign up</a></li>
-    <li><a href="/users_list">List users</a></li>
-  </ul>
+  {% if message %}
+    <h3>{{ message }}</h3>
+  {% else %}
+    Please choose either of the follows
+    <ul>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/sign_up">Sign up</a></li>
+      <li><a href="/users_list">List users</a></li>
+    </ul>
+  {% endif %}
 </p>
 </body>

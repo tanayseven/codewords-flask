@@ -21,8 +21,16 @@ def login():
     if request.method == 'GET':
         return render_template('login.jinja')
     if request.method == 'POST':
-        print("Logged in user: " + request.form['username'])
-        return render_template('home_page.jinja')
+        if Account.login(request.form['username'], request.form['password']):
+            return render_template(
+                'home_page.jinja',
+                message='Hello! ' + request.form['username'] + ' you have logged in successfully',
+            )
+        else:
+            return render_template(
+                'home_page.jinja',
+                message='Sorry, invalid login!',
+            )
 
 
 @app.route('/sign_up', methods=['POST', 'GET'])

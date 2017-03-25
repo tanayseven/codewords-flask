@@ -1,4 +1,9 @@
+from flask_app.repos import AccountRepository
+
+
 class Account(object):
+
+    __repo = AccountRepository()
 
     def __init__(self, user_name='', full_name='', balance=0):
         self.__user_name = user_name
@@ -16,3 +21,7 @@ class Account(object):
     @property
     def balance(self):
         return self.__balance
+
+    @staticmethod
+    def login(user_name, password):
+        return Account.__repo.account_exists(user_name, password)
